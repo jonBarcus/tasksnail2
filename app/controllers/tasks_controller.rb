@@ -24,17 +24,25 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
+    @user = current_user
     @task = Task.new(task_params)
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @user.soft_user?
+      @task.soft_token = @user.soft_token
     end
+
+    @task.save
+    respond_with(@task)
+
+    # respond_to do |format|
+    #   if @task.save
+    #     format.html { redirect_to @task, notice: 'Task was successfully created.' }
+    #     format.json { render :show, status: :created, location: @task }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @task.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /tasks/1
