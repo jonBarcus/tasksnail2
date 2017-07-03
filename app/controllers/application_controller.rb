@@ -14,4 +14,5 @@ class ApplicationController < ActionController::Base
   def soft_token
     session[:user_token] ||= SecureRandom.hex(8)
   end
+
 end
