@@ -46,6 +46,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #see step 6 if this doesn't work
   end
 
+  def merge_tasks
+    tasks = Task.where(soft_token: current_user.soft_token)
+    tasks.map do |task|
+      task.user = current_user
+      task.user_id = current_user.user_id
+      task.save!
+    end
+  end
+
+  def after_sign_up_path_for(resource)
+    merge_tasks
+    super(resource)
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
