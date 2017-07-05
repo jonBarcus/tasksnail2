@@ -32,6 +32,7 @@ class TasksController < ApplicationController
     end
 
     @task.save
+    binding.pry
     # respond_with(@task)
 
     respond_to do |format|
