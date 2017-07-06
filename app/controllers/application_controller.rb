@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+    binding.pry
     super || User.where(soft_token: soft_token).first_or_initialize
   end
 

@@ -42,8 +42,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.for(:sign_up) << :soft_token
+    # devise_parameter_sanitizer.for(:sign_up) << :soft_token
     #see step 6 if this doesn't work
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:soft_token])
   end
 
   def merge_tasks
