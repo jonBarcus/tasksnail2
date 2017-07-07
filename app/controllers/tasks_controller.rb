@@ -3,8 +3,13 @@ class TasksController < ApplicationController
 
   # GET /tasks
   # GET /tasks.json
+  respond_to :html
+  respond_to :js
+
   def index
-    @tasks = Task.all
+    @user = current_user
+    @tasks = @user.tasks.all
+    respond_with(@tasks)
   end
 
   # GET /tasks/1
