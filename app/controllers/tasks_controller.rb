@@ -4,7 +4,6 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    binding.pry
     @tasks = Task.all
   end
 
