@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   # root 'home#index'
   root 'tasks#index'
+
+  get '/complete/:id', to: 'tasks#complete', as: 'complete'
 end
