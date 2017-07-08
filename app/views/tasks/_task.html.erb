@@ -1,0 +1,10 @@
+<%= div_for task do %>
+  <h3><%= task.name %>
+
+    <ul>
+      <li><%= link_to "Edit Task", new_task_path, remote: true %></li>
+      <li><%= link_to "Mark Complete", complete_path, remote: true %></li>
+      <li><%= link_to "Delete Task", task, rmeote: true, method: :delete %></li>
+    </ul>
+    <% end %>
+
